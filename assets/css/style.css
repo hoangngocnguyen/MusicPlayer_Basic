@@ -1,0 +1,359 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --primary-color: #ed2461;
+    --white-color: #fff;
+    --primary-bg-color: #f3f2f7;
+    --gray-blue-color: #9d9ac4;
+}
+
+html {
+    font-size: 62.5%;
+    font-family: "Open Sans", sans-serif;
+}
+
+body {
+    background-color: var(--primary-bg-color);
+}
+
+.app {
+    width: 480px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 0 6px 1px#ccc;
+}
+
+/* Dashboard */
+.dashboard {
+    padding-bottom: 24px;
+    position: fixed;
+    width: 100%;
+    max-width: 480px;
+    top: 0;
+    background-color: var(--white-color);
+    z-index: 1;
+    box-shadow: 0 -2px 6px 1px#ccc;
+}
+
+.header {
+    text-align: center;
+    margin: 0 32px;
+    overflow: hidden;
+}
+
+.header__subtitle {
+    margin-top: 6px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.header__music-name {
+    --line-height: 3rem;
+    margin-top: 2px;
+    font-size: 2.2rem;
+    white-space: nowrap;
+}
+.header__music-name.stop-animation {
+    animation: none;
+}
+
+
+@keyframes rotateCD {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.cd {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.cd-thumbnail {
+    width: 200px;
+    height: 200px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 3px #ed2461;
+    position: relative;
+
+    --width: 30px;
+    --border-width: 10px;
+}
+.cd-thumbnail::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: var(--width);
+    height: var(--width);
+    border-radius: 50%;
+    background-color: #fff;
+    border: var(--border-width) solid #ed2461;
+}
+
+/* Progress time */
+.progress-time {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px;
+    margin-top: 24px;
+    font-size: 1.2rem;
+}
+
+/* Progress input range*/
+.dashboard__progress {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#progress {
+    -webkit-appearance: none;
+    /* Override default CSS styles - Ghi đè css mặc định*/
+    appearance: none;
+    width: 100%;
+    margin: 0 24px;
+    height: 5px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    outline: none;
+    /* Remove outline */
+    opacity: 0.7;
+    /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s;
+    /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+#progress:hover {
+    opacity: 1;
+}
+
+#progress::-webkit-slider-runnable-track {
+    /* Bù trừ border input 1px 2 bên*/
+    margin: 0 -1px;
+}
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    /* Override default look */
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+#progress::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    /* Green background */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+
+/* Control */
+.control {
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    padding: 20px;
+    font-size: 2.8rem;
+    color: var(--gray-blue-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.btn.btn-repeat.active {
+    color: var(--primary-color);
+}
+
+.btn.btn-shuffle.active {
+    color: var(--primary-color);
+}
+
+
+.btn.btn-toggle-play {
+    width: 56px;
+    height: 56px;
+    margin: 0 10px;
+    font-size: 3.2rem;
+    color: var(--white-color);
+    background-color: var(--primary-color);
+    border-radius: 50%;
+}
+
+
+.btn-toggle-play .icon-play {
+    /* padding-left: 8px; */
+    transform: translateX(3px);
+}
+
+.btn-toggle-play .icon-pause {
+    display: none;
+}
+
+.btn-toggle-play.playing .icon-pause {
+    display: block;
+}
+
+.btn-toggle-play.playing .icon-play {
+    display: none;
+}
+
+
+/* Volume */
+.audio-volume {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.volume-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.volume-icon .volume-icon--muted {
+    display: none;
+}
+.volume-icon.muted .volume-icon--muted {
+    display: block;
+}
+.volume-icon.muted .volume-icon--on {
+    display: none;
+}
+.volume-percent {
+    display: block;
+    font-size: 1.4rem;
+    /* display: none; */
+}
+
+.dashboard__bottom {
+    position: absolute;
+    font-size: 1.3rem;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    border: 1px solid var(--gray-blue-color);
+    padding: 2px 6px;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.error-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 12px;
+    max-width: 300px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #842029;
+    background-color: #f8d7da;
+    border-radius: 4px;
+    border: 1px solid #f5c2c7;
+    display: none;
+}
+
+
+/* Playlist */
+.playlist {
+    padding: 16px 12px 12px;
+    background-color: var(--primary-bg-color);
+    overflow: auto;
+    z-index: 0;
+}
+
+.song {
+    display: flex;
+    padding: 12px 12px 12px 24px;
+    background-color: var(--white-color);
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px #ccc;
+    margin-top: 12px;
+    cursor: pointer;
+}
+.song.active  {
+    box-shadow: 0 0 6px 1px #e17394;
+    background-color: #ed2461;
+}
+.song.active .song__name, 
+.song.active .song__author,
+.song.active .option {
+    color: var(--white-color);
+}
+
+
+
+.song-thumbnail {
+    background-image: url(../img/careless-whisper-dj-dark-and-md-dj-mr-sax-remix.jpg);
+    width: 56px;
+    height: 56px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.content {
+    flex: 1;
+    margin-left: 12px;
+    overflow: hidden;
+}
+
+.song__name {
+    font-size: 1.5rem;
+    white-space: nowrap;
+}
+
+.song__author {
+    margin-top: 2px;
+    font-size: 1.2rem;
+    color: var(--gray-blue-color);
+    white-space: nowrap;
+}
+
+.option {
+    font-size: 2.4rem;
+    color: var(--gray-blue-color);
+    padding: 12px;
+}

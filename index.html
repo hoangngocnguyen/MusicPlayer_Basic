@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/9973/9973495.png" type="image/x-icon">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Slab:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="app">
+        <div class="dashboard">
+            <div class="header">
+                <p class="header__subtitle">Now playing:</p>
+                <h2 class="header__music-name">Careless Whisper</h2>
+            </div>
+
+            <audio id="audio" src=""></audio>
+
+            <div class="cd">
+                <div class="audio-volume">
+                    <!-- more: .volume-icon.muted -->
+                    <div class="volume-icon">
+                        <i class="fa-solid fa-volume-high volume-icon--on"></i>
+                        <i class="fa-solid fa-volume-xmark volume-icon--muted"></i>
+                    </div>
+                    <span class="volume-percent">0%</span>
+                </div>
+                <div class="cd-thumbnail" style="background-image: url(./assets/img/careless-whisper-dj-dark-and-md-dj-mr-sax-remix.jpg);"></div>
+            </div>
+
+            <div class="progress-time">
+                <h4 class="progress-time__current"></h4>
+                <h4 class="progress-time__total"></h4>
+            </div>
+            <div class="dashboard__progress">
+                <input id="progress" class="dashboard__progress-input" type="range" value="0" min="0" max="100">
+            </div>
+
+            <div class="control">
+                <div class="btn btn-repeat">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </div>
+                <div class="btn btn-prev">
+                    <i class="fa-solid fa-backward-step"></i>
+                </div>
+                <!--  btn-toggle-play active: .playing -->
+                <div class="btn btn-toggle-play">
+                    <i class="fa-solid fa-play icon-play"></i>
+                    <i class="fa-solid fa-pause icon-pause"></i>
+                </div>
+                <div class="btn btn-next">
+                    <i class="fa-solid fa-forward-step"></i>
+                </div>
+                <div class="btn btn-shuffle">
+                    <i class="fa-solid fa-shuffle"></i>
+                </div>
+            </div>
+
+            
+            <div class="dashboard__bottom">Danh sách phát</div>
+
+        </div>
+
+        <div class="playlist">
+            <!-- active: .song.active -->
+            <div class="song">
+                <div class="song-thumbnail" style="background-image: url(./assets/img/TaiLieuKhongCoTieuDe-Khoi.jpg);"></div>
+                <div class="content">
+                    <h3 class="song__name">Careless Whisper Remix</h3>
+                    <p class="song__author">George Michael</p>
+                </div>
+                <div class="option">
+                    <i class="fa-solid fa-ellipsis"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./assets/javascript/javascript.js"></script>
+</body>
+
+</html>
