@@ -30,7 +30,7 @@ body {
 
 /* Dashboard */
 .dashboard {
-    padding-bottom: 24px;
+    /* padding-bottom: 24px; */
     position: fixed;
     width: 100%;
     max-width: 480px;
@@ -263,17 +263,20 @@ body {
     font-size: 1.4rem;
     /* display: none; */
 }
-
 .dashboard__bottom {
-    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+.dashboard__bottom-text {
     font-size: 1.3rem;
     background-color: var(--white-color);
     border-radius: 10px;
     border: 1px solid var(--gray-blue-color);
+    display: inline-block;
     padding: 2px 6px;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    top: 50%;
+    transform: translateY(50%);
 }
 
 
@@ -355,5 +358,36 @@ body {
 .option {
     font-size: 2.4rem;
     color: var(--gray-blue-color);
-    padding: 12px;
+    padding: 0 6px;
+    margin-left: 12px;
+    position: relative;
+}
+
+.option-list {
+    list-style: none;
+    width: 180px;
+    background-color: var(--white-color);
+    position: absolute;
+    top: 0;
+    right: calc(100% );
+    box-shadow: 0 0 6px #ccc;
+    z-index: 1;
+    display: none;
+}
+
+.option:hover .option-list{
+    display: block;
+}
+
+.option-link {
+    display: block;
+    text-decoration: none;
+    padding: 6px 12px;
+    color: #000;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #d4d3d3;
+}
+
+.option-link:last-child {
+    border-bottom: none;
 }

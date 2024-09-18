@@ -85,6 +85,8 @@ const playlist = document.querySelector('.playlist');
 const volumeInput = document.getElementById('volumeInput');
 const volumePercent = document.querySelector('.volume-percent');
 
+
+
 const PLAYER_STORAGE_KEY = "PLAYER_STORAGE_KEY";
 let app = {
     songs: [
@@ -165,7 +167,7 @@ let app = {
         audio.loop = this.config.isRepeat;
         repeatBtn.classList.toggle('active', audio.loop);
 
-        this.isShuffling = this.config.isShuffling;
+        this.isShuffling = this.config.isShuffling || false;
         shuffleBtn.classList.toggle('active', this.isShuffling);
     },
     setUpCD() {
@@ -192,7 +194,7 @@ let app = {
     },
     renderSongs() {
         // Tạo ra 1 playlist audio
-        let htmls = this.songs.map(function(song) {
+        let htmls = this.songs.map(function(song, index) {
             return `
             <div class="song">
                 <div class="song-thumbnail" style="background-image: url(${song.thumbnailSrc});"></div>
@@ -200,8 +202,13 @@ let app = {
                     <h3 class="song__name">${song.name}</h3>
                     <p class="song__author">${song.author}</p>
                 </div>
-                <div class="option">
+                <div class="option" data-option="${index}">
                     <i class="fa-solid fa-ellipsis"></i>
+                    <ul class="option-list">
+                        <li class="option-item">
+                            <a href="${song.audioSrc}" download="${song.name}" class="option-link option-download">Tải bài hát</a>
+                        </li>
+                    </ul>
                 </div>
             </div>`
         })
@@ -260,6 +267,7 @@ let app = {
     
     handleEvent() {
         const songElements = document.querySelectorAll('.song');
+        const options = document.querySelectorAll('.option')
 
         // Xử lí Scroll top ở playlist, cd thu lại
         const cdThumbnailHeight = cdThumbnail.clientHeight;
@@ -393,20 +401,21 @@ let app = {
         }
 
         // When click song in playlist => play
-        const optionSongElements = document.querySelectorAll('.option');
-
-        optionSongElements.forEach(function(optionSongElement) {
-            optionSongElement.addEventListener('click', function(e) {
-                // Ngăn chặn việc click song lan vào option
-                e.stopPropagation()
-            })
-        })
+        
         songElements.forEach(function(songElement, index) {
             songElement.onclick = function() {
                 app.currentIndex = index;
                 app.activeSong();
                 audio.play();
             }
+        })
+
+        // When click option
+        options.forEach(function(option) {
+            option.addEventListener('click', function(e) {
+                // Ngăn chặn việc click song lan vào option
+                e.stopPropagation() 
+            })
         })
 
 
@@ -434,6 +443,8 @@ let app = {
             audio.volume = app.currentVolume;
             $('.volume-icon').removeClass('muted')
         })
+
+        
     },
     start() {
         // Load config
@@ -458,7 +469,8 @@ let app = {
 
         // Margin top cho playlist
         var dashboardHeight = $('.dashboard').height();
-        $('.playlist').css('margin-top', `${dashboardHeight + 40}px`)
+        console.log(dashboardHeight)
+        $('.playlist').css('margin-top', `${dashboardHeight + 16}px`)
     }
 }
 
